@@ -12,27 +12,21 @@ import java.util.List;
 
 @RestController
 @RequestMapping("api/v1/static/")
+@CrossOrigin(origins = "http://localhost:3000")
 public class StaticController {
 
     @Autowired
     StaticService staticService;
 
-    @PostMapping("city/register")
-    public ResponseEntity<City> registerCity(@RequestBody City city) {
-        City insertedCity = staticService.addCity(city);
-        return ResponseEntity.status(HttpStatus.CREATED).body(insertedCity);
-    }
-
-    @PostMapping("state/register")
-    public ResponseEntity<State> registerState(@RequestBody State state) {
-        State insertedState = staticService.addState(state);
-        return ResponseEntity.status(HttpStatus.CREATED).body(insertedState);
-    }
-
-    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("state/get/all")
-    public ResponseEntity<List<State>> getStates(){
+    public ResponseEntity<List<State>> getStates() {
         List<State> listOfStates = staticService.getStates();
         return ResponseEntity.status(HttpStatus.OK).body(listOfStates);
+    }
+
+    @GetMapping("city/get/{id}")
+    public ResponseEntity<List<City>> getCityOfState(@PathVariable("id") Integer id) {
+        List<City> listOfCity = staticService.getCityOfState(id);
+        return ResponseEntity.status(HttpStatus.OK).body(listOfCity);
     }
 }

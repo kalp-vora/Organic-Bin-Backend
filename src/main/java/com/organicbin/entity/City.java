@@ -13,10 +13,11 @@ import javax.persistence.*;
 public class City {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    @Column(nullable = false)
     private String name;
     @ManyToOne
     @JoinColumn(name = "state_id", referencedColumnName = "id")
-    private State stateID;
+    private State stateId;
 }

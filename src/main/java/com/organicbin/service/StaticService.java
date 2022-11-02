@@ -12,23 +12,19 @@ import java.util.List;
 @Service
 public class StaticService {
 
-
     @Autowired
     CityRepository cityRepository;
-
     @Autowired
     StateRepository stateRepository;
 
-    public City addCity(City city) {
-        return cityRepository.save(city);
-    }
-
-    public State addState(State state) {
-        return stateRepository.save(state);
-    }
-
-    public List<State> getStates(){
+    public List<State> getStates() {
         return stateRepository.findAll();
+    }
+
+    public List<City> getCityOfState(Integer id) {
+        State state = new State();
+        state.setId(id);
+        return cityRepository.findCityByStateId(state);
     }
 
 }

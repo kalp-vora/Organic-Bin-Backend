@@ -12,7 +12,7 @@ import javax.persistence.*;
 @ToString
 public class State {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     @Column(nullable = false, unique = true)
     private String name;

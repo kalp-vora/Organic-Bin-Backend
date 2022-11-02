@@ -12,21 +12,22 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class UserAppointment implements Serializable {
+public class CompanyAppointment implements Serializable {
 
-    @Id
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "user_email", nullable = false, referencedColumnName = "email")
-    private User userEmail;
+    @javax.persistence.Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long Id;
 
     @ManyToOne
-    @JoinColumn(name = "slot_id", referencedColumnName = "id")
-    private SlotList slotID;
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private User userId;
 
     @Column(nullable = false)
     private LocalDate date;
 
+    @Column(nullable = false)
+    private Double weight;
+
     @Column(columnDefinition = "integer default '0' ")
     private Integer status;
-
 }
