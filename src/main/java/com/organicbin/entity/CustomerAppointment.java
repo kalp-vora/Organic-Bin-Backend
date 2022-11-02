@@ -12,31 +12,31 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class UserSales implements Serializable {
+public class CustomerAppointment implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long Id;
 
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User userId;
 
-    @OneToOne
-    @JoinColumn(name = "category_id", referencedColumnName = "id")
-    private CategoryWaste categoryId;
-
-    @Column(nullable = false)
-    private Double actualWeight;
+    @ManyToOne
+    @JoinColumn(name = "slot_id", referencedColumnName = "id")
+    private CollectionSlot slotId;
 
     @Column(nullable = false)
     private LocalDate date;
 
     @Column(nullable = false)
-    private Double cost;
+    private Double approxWeight;
 
     @ManyToOne
-    @JoinColumn(name = "collector_contact", referencedColumnName = "contact")
-    private User collectorContact;
+    @JoinColumn(name = "collector_id", referencedColumnName = "id")
+    private User collectorId;
+
+    @Column(columnDefinition = "integer default '0' ")
+    private Integer status;
 
 }

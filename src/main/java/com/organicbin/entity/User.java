@@ -15,11 +15,15 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-@Table(name="users")
+@Table(name = "users")
 public class User {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long Id;
+
     @Email
+    @Column(nullable = false, unique = true)
     private String email;
 
     @Column(nullable = false)
@@ -39,12 +43,8 @@ public class User {
     private String contact;
 
     @ManyToOne
-    @JoinColumn(name = "address_id",referencedColumnName = "id")
-    private Address addressID;
-
-    @ManyToOne
-    @JoinColumn(name = "role_id",referencedColumnName = "id")
-    private Role roleID;
+    @JoinColumn(name = "role_id", referencedColumnName = "id")
+    private Role roleId;
 
     @CreationTimestamp
     private LocalDateTime creationDate;
