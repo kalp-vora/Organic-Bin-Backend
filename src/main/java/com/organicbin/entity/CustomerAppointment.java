@@ -3,6 +3,7 @@ package com.organicbin.entity;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.LocalDate;
 
@@ -30,6 +31,7 @@ public class CustomerAppointment implements Serializable {
     private LocalDate date;
 
     @Column(nullable = false)
+    @NotNull(message = "Required approx weight ")
     private Double approxWeight;
 
     @ManyToOne
