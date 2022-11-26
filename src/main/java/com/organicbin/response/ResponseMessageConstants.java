@@ -8,6 +8,8 @@ public class ResponseMessageConstants {
     public static final String successStateAdded = success + "STATE ADDED";
     public static final String successCityAdded = success + "CITY ADDED";
     public static final String successUserAdded = success + "USER ADDED ";
+    public static final String successAddressAdded = success + "ADDRESS ADDED";
+    public static final String userNotFound = fail + "USER NOT FOUND";
     public static final String successAuthenticate = success + "AUTHENTICATION ";
     public static final String successCategoryAdded = success + "CATEGORY ADDED";
 

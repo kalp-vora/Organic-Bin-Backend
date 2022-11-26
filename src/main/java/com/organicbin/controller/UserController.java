@@ -1,19 +1,21 @@
 package com.organicbin.controller;
 
+import com.organicbin.entity.Address;
 import com.organicbin.entity.CustomerAppointment;
 import com.organicbin.entity.User;
 import com.organicbin.exception.UserAlreadyExistException;
+import com.organicbin.model.UserProfileResponse;
 import com.organicbin.response.ResponseHandler;
+import com.organicbin.service.AddressService;
 import com.organicbin.service.CustomerAppointmentService;
 import com.organicbin.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+
+import java.util.Collection;
 
 import static com.organicbin.response.ResponseMessageConstants.*;
 
@@ -21,11 +23,13 @@ import static com.organicbin.response.ResponseMessageConstants.*;
 @RequestMapping("api/")
 public class UserController {
     private final UserService userService;
+    private final AddressService addressService;
 
     private final CustomerAppointmentService customerAppointmentService;
 
-    public UserController(UserService userService, CustomerAppointmentService customerAppointmentService) {
+    public UserController(UserService userService, AddressService addressService, CustomerAppointmentService customerAppointmentService) {
         this.userService = userService;
+        this.addressService = addressService;
         this.customerAppointmentService = customerAppointmentService;
     }
 
@@ -38,6 +42,20 @@ public class UserController {
             return ResponseHandler.generateResponse(userAlreadyExist, HttpStatus.OK, null);
         }
         return ResponseHandler.generateResponse(successUserAdded, HttpStatus.CREATED, insertedUser);
+    }
+
+    @PostMapping("/address/add")
+    public ResponseEntity<?> addAddress(@Valid @RequestBody Address address) {
+        Address insertedAddress = addressService.addAddress(address);
+        return ResponseHandler.generateResponse(successAddressAdded, HttpStatus.CREATED, insertedAddress);
+    }
+
+
+    //TODO: UPDATE USER
+    @GetMapping("/user/{id}")
+    public ResponseEntity<?> getUserProfile(@PathVariable("id") Long id) {
+        Collection<UserProfileResponse> user = userService.getUserProfile(id);
+        return ResponseHandler.generateResponse(success, HttpStatus.OK, user);
     }
 
     //customer appointment controller
