@@ -29,21 +29,19 @@ public class UserController {
         this.customerAppointmentService = customerAppointmentService;
     }
 
-    @PostMapping("/user/register")
+    @PostMapping("/register")
     public ResponseEntity<?> registerUser(@Valid @RequestBody User user) {
-        User newUser = null;
+        User insertedUser;
         try {
-            newUser = userService.addUser(user);
+            insertedUser = userService.addUser(user);
         } catch (UserAlreadyExistException e) {
-            return ResponseHandler.generateResponse(userAlreadyExist, HttpStatus.CONFLICT, null);
+            return ResponseHandler.generateResponse(userAlreadyExist, HttpStatus.OK, null);
         }
-
-        return ResponseEntity.status(HttpStatus.CREATED).body(newUser);
-
+        return ResponseHandler.generateResponse(successUserAdded, HttpStatus.CREATED, insertedUser);
     }
 
     //customer appointment controller
-    @PostMapping("/customer/appoinment/add")
+    @PostMapping("/customer/appointment/add")
     public ResponseEntity<?> addCustomerAppointment(@Valid @RequestBody CustomerAppointment customerAppointment) {
         CustomerAppointment appointment = customerAppointmentService.addCustomerAppointment(customerAppointment);
         return ResponseHandler.generateResponse(successCustomerAppointment, HttpStatus.CREATED, appointment);

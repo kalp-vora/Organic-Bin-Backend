@@ -27,6 +27,8 @@ import org.springframework.security.oauth2.jwt.NimbusJwtEncoder;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import java.util.Arrays;
 import java.util.List;
@@ -34,10 +36,21 @@ import java.util.List;
 
 @Configuration
 @EnableWebSecurity
+@EnableWebMvc
 public class SecurityConfiguration {
 
     private RSAKey rsaKey;
-    final String[] PUBLIC_URLS = {"/api/user/register", "/api/login", "/api/address/add"};
+    final String[] PUBLIC_URLS = {
+            "/v3/api-docs",
+            "/v2/api-docs",
+            "/swagger-resources/**",
+            "/swagger-ui/**",
+            "/webjars/**",
+            "/api/register",
+            "/api/address/add",
+            "/api/login",
+            "/api/state/get/all",
+            "/api/city/get/{id}"};
 
     @Bean
     public PasswordEncoder passwordEncoder() {
