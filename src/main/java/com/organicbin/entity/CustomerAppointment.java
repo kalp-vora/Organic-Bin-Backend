@@ -1,11 +1,13 @@
 package com.organicbin.entity;
 
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Getter
@@ -40,5 +42,8 @@ public class CustomerAppointment implements Serializable {
 
     @Column(columnDefinition = "integer default '0' ")
     private Integer status;
+
+    @CreationTimestamp
+    private LocalDateTime creationDate;
 
 }
