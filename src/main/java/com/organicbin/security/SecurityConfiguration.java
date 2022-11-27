@@ -28,7 +28,6 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import java.util.Arrays;
 import java.util.List;
@@ -50,6 +49,8 @@ public class SecurityConfiguration {
             "/api/address/add",
             "/api/login",
             "/api/state/get/all",
+            "/api/city/get/all",
+            "/api/slot/get/all",
             "/api/city/get/{id}"};
 
     @Bean

@@ -1,6 +1,7 @@
 package com.organicbin.controller;
 
 import com.organicbin.entity.City;
+import com.organicbin.entity.CollectionSlot;
 import com.organicbin.entity.State;
 import com.organicbin.response.ResponseHandler;
 import com.organicbin.service.AdminServices;
@@ -11,8 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import static com.organicbin.response.ResponseMessageConstants.successCityAdded;
-import static com.organicbin.response.ResponseMessageConstants.successStateAdded;
+import static com.organicbin.response.ResponseMessageConstants.*;
 
 @RestController
 @RequestMapping("api/admin")
@@ -35,5 +35,13 @@ public class AdminController {
         City insertedCity = adminServices.addCity(city);
         return ResponseHandler.generateResponse(successCityAdded, HttpStatus.CREATED, insertedCity);
     }
+
+    @PostMapping("/slot/add")
+    public ResponseEntity<?> addCollectionSlot(@RequestBody CollectionSlot collectionSlot) {
+        CollectionSlot insertedCollectionSlot = adminServices.addCollectionSlot(collectionSlot);
+        return ResponseHandler.generateResponse(success, HttpStatus.OK, insertedCollectionSlot);
+    }
+
+
 
 }
