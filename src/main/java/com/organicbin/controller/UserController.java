@@ -18,7 +18,6 @@ import javax.validation.Valid;
 
 import java.util.Collection;
 import java.util.List;
-import java.util.Optional;
 
 import static com.organicbin.response.ResponseMessageConstants.*;
 
@@ -80,16 +79,27 @@ public class UserController {
         return ResponseHandler.generateResponse(successCustomerAppointment, HttpStatus.CREATED, appointment);
     }
 
+//    @GetMapping("/customer/appointment/get/{id}")
+//    public ResponseEntity<?> getAppointments(@PathVariable("id") Long id) {
+//        Optional<List<CustomerAppointment>> customerAppointmentList;
+//        try {
+//            customerAppointmentList = customerAppointmentService.getAppointments(id);
+//            System.out.println("appointment list: " + customerAppointmentList);
+//        } catch (AuthenticationException e) {
+//            return ResponseHandler.generateResponse(userNotFound, HttpStatus.OK, null);
+//        }
+//        return ResponseHandler.generateResponse(userNotFound, HttpStatus.OK, customerAppointmentList);
+//    }
+
     @GetMapping("/customer/appointment/get/{id}")
-    public ResponseEntity<?> getAppointments(@PathVariable("id") Long id) {
-        Optional<List<CustomerAppointment>> customerAppointmentList;
+    public ResponseEntity<?> getCustomerAppointments(@PathVariable("id") Long id) {
+        List<CustomerAppointment> customerAppointmentList;
         try {
-            customerAppointmentList = customerAppointmentService.getAppointments(id);
+            customerAppointmentList = customerAppointmentService.getCustomerAppointments(id);
         } catch (AuthenticationException e) {
             return ResponseHandler.generateResponse(userNotFound, HttpStatus.OK, null);
         }
-
-        return ResponseHandler.generateResponse(userNotFound, HttpStatus.OK, customerAppointmentList);
+        return ResponseHandler.generateResponse(success, HttpStatus.OK, customerAppointmentList);
     }
 
 }

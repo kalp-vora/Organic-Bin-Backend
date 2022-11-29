@@ -1,13 +1,7 @@
 package com.organicbin.service;
 
-import com.organicbin.entity.City;
-import com.organicbin.entity.CollectionSlot;
-import com.organicbin.entity.CustomerAppointment;
-import com.organicbin.entity.State;
-import com.organicbin.repository.CityRepository;
-import com.organicbin.repository.CollectionSlotRepository;
-import com.organicbin.repository.CustomerAppointmentRepository;
-import com.organicbin.repository.StateRepository;
+import com.organicbin.entity.*;
+import com.organicbin.repository.*;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,12 +13,14 @@ public class AdminServices {
     private final CityRepository cityRepository;
     private final CollectionSlotRepository collectionSlotRepository;
     private final CustomerAppointmentRepository customerAppointmentRepository;
+    private final UserRepository userRepository;
 
-    public AdminServices(StateRepository stateRepository, CityRepository cityRepository, CollectionSlotRepository collectionSlotRepository, CustomerAppointmentRepository customerAppointmentRepository) {
+    public AdminServices(StateRepository stateRepository, CityRepository cityRepository, CollectionSlotRepository collectionSlotRepository, CustomerAppointmentRepository customerAppointmentRepository, UserRepository userRepository) {
         this.stateRepository = stateRepository;
         this.cityRepository = cityRepository;
         this.collectionSlotRepository = collectionSlotRepository;
         this.customerAppointmentRepository = customerAppointmentRepository;
+        this.userRepository = userRepository;
     }
 
     public State addState(State state) {
@@ -41,5 +37,14 @@ public class AdminServices {
 
     public List<CustomerAppointment> getAllCustomerAppointments() {
         return customerAppointmentRepository.findAll();
+    }
+
+    public CustomerAppointment updateCustomerAppointmentStatus(CustomerAppointment customerAppointment)
+    {
+        return customerAppointmentRepository.save(customerAppointment);
+    }
+
+    public List<User> getAllUsers() {
+        return userRepository.findAll();
     }
 }

@@ -1,9 +1,6 @@
 package com.organicbin.controller;
 
-import com.organicbin.entity.City;
-import com.organicbin.entity.CollectionSlot;
-import com.organicbin.entity.CustomerAppointment;
-import com.organicbin.entity.State;
+import com.organicbin.entity.*;
 import com.organicbin.response.ResponseHandler;
 import com.organicbin.service.AdminServices;
 import org.springframework.http.HttpStatus;
@@ -46,6 +43,18 @@ public class AdminController {
     public ResponseEntity<?> getAllCustomerAppointments() {
         List<CustomerAppointment> customerAppointments = adminServices.getAllCustomerAppointments();
         return ResponseHandler.generateResponse(success, HttpStatus.OK, customerAppointments);
+    }
+
+    @PutMapping("/customer/appointment/changeStatus")
+    public ResponseEntity<?> changeStatus(@RequestBody CustomerAppointment customerAppointment) {
+        CustomerAppointment updatedCustomerAppointment = adminServices.updateCustomerAppointmentStatus(customerAppointment);
+        return ResponseHandler.generateResponse(success, HttpStatus.OK, updatedCustomerAppointment);
+    }
+
+    @GetMapping("/user/get/all")
+    public ResponseEntity<?> getAllUsers() {
+        List<User> userList = adminServices.getAllUsers();
+        return ResponseHandler.generateResponse(success, HttpStatus.OK, userList);
     }
 
 }
