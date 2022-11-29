@@ -30,6 +30,6 @@ public class Address {
     @Column(nullable = false)
     private Integer pincode;
 
-    @Column(nullable = false, columnDefinition = "varchar(10) default 'Home'")
+    @Column(columnDefinition = "varchar(10) default 'Home'")
     private String tag;
 }

@@ -2,15 +2,15 @@ package com.organicbin.controller;
 
 import com.organicbin.entity.City;
 import com.organicbin.entity.CollectionSlot;
+import com.organicbin.entity.CustomerAppointment;
 import com.organicbin.entity.State;
 import com.organicbin.response.ResponseHandler;
 import com.organicbin.service.AdminServices;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 import static com.organicbin.response.ResponseMessageConstants.*;
 
@@ -42,6 +42,10 @@ public class AdminController {
         return ResponseHandler.generateResponse(success, HttpStatus.OK, insertedCollectionSlot);
     }
 
-
+    @GetMapping("/customer/appointment/get/all")
+    public ResponseEntity<?> getAllCustomerAppointments() {
+        List<CustomerAppointment> customerAppointments = adminServices.getAllCustomerAppointments();
+        return ResponseHandler.generateResponse(success, HttpStatus.OK, customerAppointments);
+    }
 
 }

@@ -3,6 +3,7 @@ package com.organicbin.controller;
 import com.organicbin.entity.Address;
 import com.organicbin.entity.CustomerAppointment;
 import com.organicbin.entity.User;
+import com.organicbin.exception.AuthenticationException;
 import com.organicbin.exception.UserAlreadyExistException;
 import com.organicbin.model.UserProfileResponse;
 import com.organicbin.response.ResponseHandler;
@@ -16,6 +17,8 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 import java.util.Collection;
+import java.util.List;
+import java.util.Optional;
 
 import static com.organicbin.response.ResponseMessageConstants.*;
 
@@ -50,6 +53,12 @@ public class UserController {
         return ResponseHandler.generateResponse(successAddressAdded, HttpStatus.CREATED, insertedAddress);
     }
 
+    @PutMapping("/address/update")
+    public ResponseEntity<?> updateUserAddress(@RequestBody Address address) {
+        Address updatedAddress = addressService.updateUserAddress(address);
+        return ResponseHandler.generateResponse(success, HttpStatus.OK, updatedAddress);
+    }
+
 
     //TODO: UPDATE USER
     @GetMapping("/user/{id}")
@@ -58,10 +67,29 @@ public class UserController {
         return ResponseHandler.generateResponse(success, HttpStatus.OK, user);
     }
 
-    //customer appointment controller
+    @PutMapping("/user/update")
+    public ResponseEntity<?> updateUser(@RequestBody User user) {
+        User updatedUser = userService.updateUser(user);
+        return ResponseHandler.generateResponse(success, HttpStatus.OK, updatedUser);
+    }
+
+    // Customer APIS
     @PostMapping("/customer/appointment/add")
     public ResponseEntity<?> addCustomerAppointment(@Valid @RequestBody CustomerAppointment customerAppointment) {
         CustomerAppointment appointment = customerAppointmentService.addCustomerAppointment(customerAppointment);
         return ResponseHandler.generateResponse(successCustomerAppointment, HttpStatus.CREATED, appointment);
     }
+
+    @GetMapping("/customer/appointment/get/{id}")
+    public ResponseEntity<?> getAppointments(@PathVariable("id") Long id) {
+        Optional<List<CustomerAppointment>> customerAppointmentList;
+        try {
+            customerAppointmentList = customerAppointmentService.getAppointments(id);
+        } catch (AuthenticationException e) {
+            return ResponseHandler.generateResponse(userNotFound, HttpStatus.OK, null);
+        }
+
+        return ResponseHandler.generateResponse(userNotFound, HttpStatus.OK, customerAppointmentList);
+    }
+
 }

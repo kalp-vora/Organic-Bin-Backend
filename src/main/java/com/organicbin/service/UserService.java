@@ -1,5 +1,6 @@
 package com.organicbin.service;
 
+import com.organicbin.entity.Address;
 import com.organicbin.entity.User;
 import com.organicbin.model.UserProfileResponse;
 import com.organicbin.repository.AddressRepository;
@@ -37,5 +38,10 @@ public class UserService {
     public Collection<UserProfileResponse> getUserProfile(Long id) {
         return userRepository.getUserProfile(id);
     }
+
+    public User updateUser(User user) {
+        return userRepository.save(user);
+    }
+
 
 }
