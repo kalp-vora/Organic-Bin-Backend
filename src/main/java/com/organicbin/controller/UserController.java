@@ -58,8 +58,6 @@ public class UserController {
         return ResponseHandler.generateResponse(success, HttpStatus.OK, updatedAddress);
     }
 
-
-    //TODO: UPDATE USER
     @GetMapping("/user/{id}")
     public ResponseEntity<?> getUserProfile(@PathVariable("id") Long id) {
         Collection<UserProfileResponse> user = userService.getUserProfile(id);
@@ -79,17 +77,6 @@ public class UserController {
         return ResponseHandler.generateResponse(successCustomerAppointment, HttpStatus.CREATED, appointment);
     }
 
-//    @GetMapping("/customer/appointment/get/{id}")
-//    public ResponseEntity<?> getAppointments(@PathVariable("id") Long id) {
-//        Optional<List<CustomerAppointment>> customerAppointmentList;
-//        try {
-//            customerAppointmentList = customerAppointmentService.getAppointments(id);
-//            System.out.println("appointment list: " + customerAppointmentList);
-//        } catch (AuthenticationException e) {
-//            return ResponseHandler.generateResponse(userNotFound, HttpStatus.OK, null);
-//        }
-//        return ResponseHandler.generateResponse(userNotFound, HttpStatus.OK, customerAppointmentList);
-//    }
 
     @GetMapping("/customer/appointment/get/{id}")
     public ResponseEntity<?> getCustomerAppointments(@PathVariable("id") Long id) {

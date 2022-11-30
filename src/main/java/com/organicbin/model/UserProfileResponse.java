@@ -11,7 +11,7 @@ public interface UserProfileResponse {
 
     String getGender();
 
-    LocalDate getDateOfBirth();
+    LocalDate getDate_of_birth();
 
     String getContact();
 
