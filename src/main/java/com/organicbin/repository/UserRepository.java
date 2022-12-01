@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 
 public interface UserRepository extends JpaRepository<User, Long> {
@@ -18,4 +19,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
             "JOIN city ON address.city_id = city.id " +
             "JOIN state ON city.state_id = state.id WHERE users.id = ?1", nativeQuery = true)
     Collection<UserProfileResponse> getUserProfile(Long id);
+
+    List<User> findByRole(String role);
 }

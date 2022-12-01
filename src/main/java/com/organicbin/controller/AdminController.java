@@ -57,4 +57,9 @@ public class AdminController {
         return ResponseHandler.generateResponse(success, HttpStatus.OK, userList);
     }
 
+    @GetMapping("/collector/get/all")
+    public ResponseEntity<?> getAllCollectors() {
+        List<User> collectorList = adminServices.getAllCollectors();
+        return ResponseHandler.generateResponse(success, HttpStatus.OK, collectorList);
+    }
 }

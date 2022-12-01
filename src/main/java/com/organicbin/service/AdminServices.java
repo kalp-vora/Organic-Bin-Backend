@@ -39,12 +39,15 @@ public class AdminServices {
         return customerAppointmentRepository.findAll();
     }
 
-    public CustomerAppointment updateCustomerAppointmentStatus(CustomerAppointment customerAppointment)
-    {
+    public CustomerAppointment updateCustomerAppointmentStatus(CustomerAppointment customerAppointment) {
         return customerAppointmentRepository.save(customerAppointment);
     }
 
     public List<User> getAllUsers() {
         return userRepository.findAll();
+    }
+
+    public List<User> getAllCollectors() {
+        return userRepository.findByRole("COLLECTOR");
     }
 }
