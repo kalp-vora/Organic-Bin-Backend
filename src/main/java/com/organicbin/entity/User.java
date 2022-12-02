@@ -7,7 +7,6 @@ import org.hibernate.validator.constraints.Length;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
@@ -37,10 +36,9 @@ public class User {
     @NotEmpty(message = "Required Name")
     private String name;
 
-    @Length(min = 1, max = 1)
+    @Length(max = 1)
     private String gender;
 
-    @Column(nullable = false)
     private LocalDate dateOfBirth;
 
     @Column(nullable = false)

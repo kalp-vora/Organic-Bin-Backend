@@ -45,10 +45,22 @@ public class AdminController {
         return ResponseHandler.generateResponse(success, HttpStatus.OK, customerAppointments);
     }
 
+    @GetMapping("/company/appointment/get/all")
+    public ResponseEntity<?> getAllCompanyAppointments() {
+        List<CompanyAppointment> companyAppointments = adminServices.getAllCompanyAppointments();
+        return ResponseHandler.generateResponse(success, HttpStatus.OK, companyAppointments);
+    }
+
     @PutMapping("/customer/appointment/changeStatus")
-    public ResponseEntity<?> changeStatus(@RequestBody CustomerAppointment customerAppointment) {
+    public ResponseEntity<?> changeCustomerAppointmentStatus(@RequestBody CustomerAppointment customerAppointment) {
         CustomerAppointment updatedCustomerAppointment = adminServices.updateCustomerAppointmentStatus(customerAppointment);
         return ResponseHandler.generateResponse(success, HttpStatus.OK, updatedCustomerAppointment);
+    }
+
+    @PutMapping("/company/appointment/changeStatus")
+    public ResponseEntity<?> changeCompanyAppointmentStatus(@RequestBody CompanyAppointment companyAppointment) {
+        CompanyAppointment updatedCompanyAppointment = adminServices.updateCompanyAppointmentStatus(companyAppointment);
+        return ResponseHandler.generateResponse(success, HttpStatus.OK, updatedCompanyAppointment);
     }
 
     @GetMapping("/user/get/all")

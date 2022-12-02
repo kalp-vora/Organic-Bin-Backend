@@ -13,13 +13,15 @@ public class AdminServices {
     private final CityRepository cityRepository;
     private final CollectionSlotRepository collectionSlotRepository;
     private final CustomerAppointmentRepository customerAppointmentRepository;
+    private final CompanyAppointmentRepository companyAppointmentRepository;
     private final UserRepository userRepository;
 
-    public AdminServices(StateRepository stateRepository, CityRepository cityRepository, CollectionSlotRepository collectionSlotRepository, CustomerAppointmentRepository customerAppointmentRepository, UserRepository userRepository) {
+    public AdminServices(StateRepository stateRepository, CityRepository cityRepository, CollectionSlotRepository collectionSlotRepository, CustomerAppointmentRepository customerAppointmentRepository, CompanyAppointmentRepository companyAppointmentRepository, UserRepository userRepository) {
         this.stateRepository = stateRepository;
         this.cityRepository = cityRepository;
         this.collectionSlotRepository = collectionSlotRepository;
         this.customerAppointmentRepository = customerAppointmentRepository;
+        this.companyAppointmentRepository = companyAppointmentRepository;
         this.userRepository = userRepository;
     }
 
@@ -39,8 +41,16 @@ public class AdminServices {
         return customerAppointmentRepository.findAll();
     }
 
+    public List<CompanyAppointment> getAllCompanyAppointments() {
+        return companyAppointmentRepository.findAll();
+    }
+
     public CustomerAppointment updateCustomerAppointmentStatus(CustomerAppointment customerAppointment) {
         return customerAppointmentRepository.save(customerAppointment);
+    }
+
+    public CompanyAppointment updateCompanyAppointmentStatus(CompanyAppointment companyAppointment) {
+        return companyAppointmentRepository.save(companyAppointment);
     }
 
     public List<User> getAllUsers() {
@@ -54,4 +64,5 @@ public class AdminServices {
     public List<User> getAllCompany() {
         return userRepository.findByRole("COMPANY");
     }
+
 }
