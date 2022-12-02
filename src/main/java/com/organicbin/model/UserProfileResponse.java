@@ -21,6 +21,8 @@ public interface UserProfileResponse {
 
     String getTag();
 
+    Long getAddress_id();
+
     String getCity();
 
     String getState();

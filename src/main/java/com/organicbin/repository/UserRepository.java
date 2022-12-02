@@ -14,7 +14,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
     Optional<User> findByEmail(String email);
 
     @Query(value = "SELECT users.name, users.email, users.gender, users.date_of_birth, users.contact," +
-            "address.location, address.pincode, address.tag, city.name as city, state.name as state FROM users " +
+            "address.location, address.pincode, address.tag, address.id as address_id, city.name as city, state.name as state FROM users " +
             "JOIN address ON users.id = address.user_id " +
             "JOIN city ON address.city_id = city.id " +
             "JOIN state ON city.state_id = state.id WHERE users.id = ?1", nativeQuery = true)
