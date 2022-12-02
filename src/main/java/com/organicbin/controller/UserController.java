@@ -1,6 +1,7 @@
 package com.organicbin.controller;
 
 import com.organicbin.entity.Address;
+import com.organicbin.entity.CompanyAppointment;
 import com.organicbin.entity.CustomerAppointment;
 import com.organicbin.entity.User;
 import com.organicbin.exception.AuthenticationException;
@@ -8,6 +9,7 @@ import com.organicbin.exception.UserAlreadyExistException;
 import com.organicbin.model.UserProfileResponse;
 import com.organicbin.response.ResponseHandler;
 import com.organicbin.service.AddressService;
+import com.organicbin.service.CompanyAppointmentService;
 import com.organicbin.service.CustomerAppointmentService;
 import com.organicbin.service.UserService;
 import org.springframework.http.HttpStatus;
@@ -28,11 +30,13 @@ public class UserController {
     private final AddressService addressService;
 
     private final CustomerAppointmentService customerAppointmentService;
+    private final CompanyAppointmentService companyAppointmentService;
 
-    public UserController(UserService userService, AddressService addressService, CustomerAppointmentService customerAppointmentService) {
+    public UserController(UserService userService, AddressService addressService, CustomerAppointmentService customerAppointmentService, CompanyAppointmentService companyAppointmentService) {
         this.userService = userService;
         this.addressService = addressService;
         this.customerAppointmentService = customerAppointmentService;
+        this.companyAppointmentService = companyAppointmentService;
     }
 
     @PostMapping("/register")
@@ -87,6 +91,24 @@ public class UserController {
             return ResponseHandler.generateResponse(userNotFound, HttpStatus.OK, null);
         }
         return ResponseHandler.generateResponse(success, HttpStatus.OK, customerAppointmentList);
+    }
+
+    // COMPANY APIS
+    @PostMapping("/company/appointment/add")
+    public ResponseEntity<?> addCompanyAppointment(@Valid @RequestBody CompanyAppointment companyAppointment) {
+        CompanyAppointment appointment = companyAppointmentService.addCompanyAppointment(companyAppointment);
+        return ResponseHandler.generateResponse(successCompanyAppointment, HttpStatus.CREATED, appointment);
+    }
+
+    @GetMapping("/company/appointment/get/{id}")
+    public ResponseEntity<?> getCompanyAppointments(@PathVariable("id") Long id) {
+        List<CompanyAppointment> companyAppointmentList;
+        try {
+            companyAppointmentList = companyAppointmentService.getCompanyAppointments(id);
+        } catch (AuthenticationException e) {
+            return ResponseHandler.generateResponse(userNotFound, HttpStatus.OK, null);
+        }
+        return ResponseHandler.generateResponse(success, HttpStatus.OK, companyAppointmentList);
     }
 
 }

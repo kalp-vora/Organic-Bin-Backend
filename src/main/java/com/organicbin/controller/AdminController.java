@@ -62,4 +62,11 @@ public class AdminController {
         List<User> collectorList = adminServices.getAllCollectors();
         return ResponseHandler.generateResponse(success, HttpStatus.OK, collectorList);
     }
+
+    @GetMapping("/company/get/all")
+    public ResponseEntity<?> getAllCompany() {
+        List<User> companyList = adminServices.getAllCompany();
+        return ResponseHandler.generateResponse(success, HttpStatus.OK, companyList);
+    }
+
 }

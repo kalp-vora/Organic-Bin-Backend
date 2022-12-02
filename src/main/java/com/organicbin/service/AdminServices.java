@@ -50,4 +50,8 @@ public class AdminServices {
     public List<User> getAllCollectors() {
         return userRepository.findByRole("COLLECTOR");
     }
+
+    public List<User> getAllCompany() {
+        return userRepository.findByRole("COMPANY");
+    }
 }

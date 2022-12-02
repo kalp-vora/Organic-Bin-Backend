@@ -38,11 +38,9 @@ public class User {
     private String name;
 
     @Length(min = 1, max = 1)
-    @NotEmpty(message = "Required Gender")
     private String gender;
 
     @Column(nullable = false)
-    @NotNull(message = "Required Date of Birth 'yyyy-mm-dd' ")
     private LocalDate dateOfBirth;
 
     @Column(nullable = false)

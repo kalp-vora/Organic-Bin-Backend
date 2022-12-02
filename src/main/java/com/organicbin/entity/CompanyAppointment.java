@@ -28,6 +28,8 @@ public class CompanyAppointment implements Serializable {
     @Column(nullable = false)
     private Double weight;
 
+    private String message;
+
     @Column(columnDefinition = "integer default '0' ")
     private Integer status;
 }
