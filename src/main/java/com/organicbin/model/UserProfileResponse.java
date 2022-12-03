@@ -27,6 +27,10 @@ public interface UserProfileResponse {
 
     String getCity();
 
+    Long getCity_id();
+
     String getState();
+
+    Long getState_id();
 
 }
