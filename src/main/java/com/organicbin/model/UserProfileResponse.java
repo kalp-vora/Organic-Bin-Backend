@@ -9,6 +9,8 @@ public interface UserProfileResponse {
 
     String getEmail();
 
+    String getPassword();
+
     String getGender();
 
     LocalDate getDate_of_birth();
